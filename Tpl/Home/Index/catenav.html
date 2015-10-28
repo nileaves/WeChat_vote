@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>分类导航</title>
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/Mobile/css/style.css"/>
+<script type="text/javascript" src="__PUBLIC__/Mobile/js/jquery.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".first li").hover(function(){
+            $(this).children(".nav_child").show();
+        },function(){
+            $(this).children(".nav_child").hide();
+        })
+
+    });
+</script>
+</head>
+
+<body>
+<div class="index_nav">
+  <div class="first"> 
+    <ul>
+	    <li><span class="right_jt"><img src="__PUBLIC__/Mobile/images/list_jt.png" width="22" height="22"/></span><a href="{:U('Index/index')}">首页</a></li>
+		<volist name="list" id="vo">
+            <li>
+                <span class="right_jt"><img src="__PUBLIC__/Mobile/images/list_jt.png" width="22" height="22"/></span><a href="" class="nav1">{$vo.cate_name}</a>
+                <div class="nav_child">
+                    <volist name="vo.child" id="child">
+                        <a href="#" class="nav2">{$child['cate_name']}</a><span>|</span>
+                    </volist>
+                </div>
+            </li>
+        </volist>
+
+
+
+
+		<li><span class="right_jt"><img src="__PUBLIC__/Mobile/images/list_jt.png" width="22"/></span><a href="myshop.html">我的购物</a>
+		    <div class="nav_child">
+			    <a href="myorder.html">我的订单</a><span>|</span>
+				<a href="myshopcart.html">购物车</a><span>|</span>
+				<a href="wuliu.html">物流查询</a><span>|</span>
+			</div>
+		</li>
+		<li><span class="right_jt"><img src="__PUBLIC__/Mobile/images/list_jt.png" width="22"/></span><a href="more.html">更多</a></li>
+	</ul>
+  </div>
+</div>
+<script>
+    $(".nav2").click(function(){
+        var name = $(this).text();
+        location.href = "{:U('Index/catesearch')}?name="+name;
+    });
+</script>
+</body>
+</html>

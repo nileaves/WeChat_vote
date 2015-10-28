@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link type="text/css" href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="__PUBLIC__/bootstrap/js/jquery-2.1.1.min.js"></script>
+    <script  type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .navbar{
+            background-color: limegreen;
+        }
+        .login{
+            margin-bottom: 15px;
+        }
+        .back{
+            padding-top: 15px;
+        }
+        .register{
+            margin-bottom: 70px;
+        }
+        .logo{
+            margin-top: 66px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top text-center">
+        <div class="row">
+            <div class="col-xs-3 back">
+                <span class="glyphicon glyphicon-chevron-left " aria-hidden="true" style="color: #ffffff">返回</span>
+            </div>
+            <div class="col-xs-6">
+                <a class="navbar-brand col-xs-12" href="#" style="color: #ffffff">账户管理</a>
+            </div>
+        </div>
+    </nav>
+<div class="row">
+    <div class="container col-xs-10 col-xs-offset-1">
+        <form class="form-signin" role="form" action="{:U('Index/sign_in')}" method="post">
+            <div class="form-group col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3">
+
+                <img src="__PUBLIC__/Mobile/images/user_03.png" alt="..." class="logo img-circle">
+
+            </div>
+            <div class="form-group col-xs-12">
+
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <input type="phone" class="form-control" placeholder="手机号码登陆" name="phone" required autofocus>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-leaf"></span></span>
+                    <input type="password" class="form-control" placeholder="密码" id="password" name="password" required>
+                </div>
+                <input name="auto_login" type="checkbox" value="1">一周内免登录
+            </div>
+            <div class="login col-xs-8 col-xs-offset-2">
+                <button class="btn btn-lg btn-success btn-block" type="submit">登陆</button>
+            </div>
+           <div class="register col-xs-8 col-xs-offset-2">
+               <button class="re btn btn-lg btn-warning btn-block" type="button">注册</button>
+           </div>
+
+
+            <!--<a href="register.html" class="btn btn-link  btn-lg col-xs-offset-10" role="button">注册</a>-->
+        </form>
+    </div> <!-- /container -->
+</div>
+
+
+    <!--<nav class="navbar navbar-default navbar-fixed-top text-center">
+
+        <a class="navbar-brand col-xs-12" href="#">登陆</a>
+
+    </nav>-->
+
+</div>
+<script>
+    $(".re").click(function(){
+        location.href = "{:U('Index/register')}";
+    });
+
+    $(".logo").addClass("carousel-inner img-responsive img-rounded");
+    $(".back").click(function(){
+        history.back();
+    });
+
+</script>
+
+</body>
+</html>

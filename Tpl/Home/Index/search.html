@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link type="text/css" href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/Mobile/css/elusive-webfont.css">
+    <script type="text/javascript" src="__PUBLIC__/bootstrap/js/jquery-2.1.1.min.js"></script>
+    <script  type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .navbar{
+            background-color: limegreen;
+        }
+        .navbar .col-xs-2{
+            margin-top: 15px;
+        }
+        .navbar .col-xs-8{
+            margin-top: 12px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-default navbar-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-2">
+
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="font-size: 23px;color: #ffffff"></span>
+                    </div>
+                    <div class="col-xs-8">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control" id="exampleInputAmount" placeholder="搜索商品">
+                                    <div class="input-group-addon">
+                                        <a href="#" id="d"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </nav>
+
+    </div>
+    <div>
+        <!--商品列表-->
+        <ul class="list-group">
+            <volist name="re" id="vo">
+                <li class="list-group-item">
+                    <div class="media row">
+                        <div class="media-left media-middle col-xs-3">
+                            <a href="#">
+                                <img class="media-object" src="{$vo['root']}{$vo['goods_thumb']}" alt=""/>
+                            </a>
+                        </div>
+                        <div class="media-body row">
+                            <div class="col-xs-9">
+                                <h4 class="media-heading">{$vo['goods_name']}</h4>
+                                <p><del><small>￥{$vo['market_price']}</small></del></p>
+                                <strong>￥{$vo['goods_price']}</strong>
+                            </div>
+
+                            <div class="col-xs-3">
+                                <div class="auto_mar" style="margin-top: 20px">
+                                    <i class="el-icon-shopping-cart-sign" style="color: #f7ab00;font-size: 30px"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </volist>
+
+        </ul>
+    </div><!--商品列表-->
+    <script>
+        $("#d").click(function(){
+            alert("fsd");
+        });
+    </script>
+</body>
+</html>

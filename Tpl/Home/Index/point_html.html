@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link type="text/css" href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/Mobile/css/elusive-webfont.css">
+    <script type="text/javascript" src="__PUBLIC__/bootstrap/js/jquery-2.1.1.min.js"></script>
+    <script  type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .navbar{
+            background-color: limegreen;
+        }
+        .back{
+            padding-top: 15px;
+        }
+        .first{
+            margin-top: 70px;
+        }
+        .add .col-xs-4{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default navbar-fixed-top text-center">
+        <div class="row">
+            <div class="col-xs-3 back">
+                <span class="glyphicon glyphicon-chevron-left " aria-hidden="true" style="color: #ffffff">返回</span>
+            </div>
+            <div class="col-xs-6">
+                <a class="navbar-brand col-xs-12" href="#" style="color: #ffffff">选择服务点</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <!--最近访问的服务点-->
+    <div class="page-header first">
+        <h5>最近访问的服务点</h5>
+    </div>
+   <div class="row recently">
+
+   </div>
+
+
+    <div class="page-header">
+        <h5>服务区选择</h5>
+    </div>
+    <div class="row add">
+        <div class="col-xs-4">
+            <volist name="area" id="vo">
+                <a class="btn btn-default btn-block area" role="button" id="{$vo['id']}">{$vo['name']}</a>
+            </volist>
+
+        </div>
+
+        <!-- <div class="col-xs-4">
+             <a class="btn btn-default" href="#" role="button">紫晶悦城</a>
+         </div>-->
+    </div>
+    <div class="page-header">
+        <h5>服务点选择</h5>
+    </div>
+    <div class="row add" id="points">
+
+    </div>
+</div>
+<script>
+    //if(window.localStorage){     alert("浏览支持localStorage") }else{    alert("浏览暂不支持localStorage") }
+    $(document).ready(function(){
+
+
+            //显示最近访问的服务点
+            var jl_recently = localStorage.getItem("jl_recently");
+            if (jl_recently) {
+                var rps = [];
+                rps = jl_recently.split(",");
+                //for(i=0;i<rps.length;i++){
+                for (i = 0; i < 3; i++) {
+                    var rp = [];
+                    rp = rps[i].split("_");
+                    var add_text = "<div class='col-xs-4'><a class='btn btn-default btn-block' onclick='go(this)' name='"+rp[0]+"' role='button'>" + rp[1] + "</a></div>";
+                    $(".recently").append(add_text);
+                }
+            } else {
+                //localStorage.setItem("jl_recently","");
+            }
+
+    });
+//点击区域获得服务点
+    $(".area").click(function(){
+        var area_id = this.id;
+        $.ajax({
+            type:"post",
+            url:"{:U('Index/get_point')}",
+            data:"id="+area_id,
+            dataType:"json",
+            success:function(data){
+                $("#points").html("");
+                for(i =0;i<data.length;i++){
+                    var add_text = "<div class='col-xs-4'><a class='btn btn-default btn-block' onclick='go(this)' name='"+data[i]['id']+"' role='button'>"+data[i]['name']+"</a></div>";
+                    $("#points").append(add_text);
+                }
+            }
+
+        });
+    });
+    //点击服务点跳转页面
+    function go(obj){
+
+        var name = $(obj).text();
+        var id = $(obj).attr("name");
+        //存储默认的地址ID和名称
+        localStorage.setItem("jl_point_id",id);
+        localStorage.setItem("jl_point_name",name);
+
+        //加入最近使用的服务点
+        var re = id+"_"+name;
+        var recently = localStorage.getItem("jl_recently");
+        if(recently){
+            var res = recently.split(",");
+            for(var i=0;i<res.length;i++){
+                if(re == res[i]){
+                    res.splice(i,1);
+                }
+            }
+            res.unshift(re);    //在队首加入新元素
+            res.join(",");      //将数组用逗号连接为字符串
+            localStorage.setItem("jl_recently",res);
+        }else{
+            localStorage.setItem("jl_recently",re);
+        }
+        location.href = "{:U('Index/home')}/point_id/"+id;
+    }
+    $(".back").click(function(){
+        history.back();
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link type="text/css" href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/Mobile/css/elusive-webfont.css">
+    <script type="text/javascript" src="__PUBLIC__/bootstrap/js/jquery-2.1.1.min.js"></script>
+    <script  type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        .navbar{
+            background-color: limegreen;
+        }
+        .navbar .col-xs-2{
+            margin-top: 15px;
+        }
+        .navbar .col-xs-8{
+            margin-top: 12px;
+        }
+        /*解决网页水平滑动*/
+        .nav-tabs{
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .tab-content{
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .price{
+            color: orangered;
+            font-size:20px ;
+        }
+        .bs-example{
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default navbar-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2">
+
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="font-size: 23px;color: #ffffff"></span>
+                </div>
+                <div class="col-xs-8">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="exampleInputAmount" placeholder="搜索商品">
+                                <div class="input-group-addon">
+                                    <a href="#" id="d"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </nav>
+
+
+    <ul class="nav nav-tabs row text-center" role="tablist">
+        <li role="presentation" class="active col-xs-4"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
+        <li role="presentation" class="col-xs-4"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">产品详情</a></li>
+        <li role="presentation" class="col-xs-4"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">相关评论</a></li>
+
+    </ul>
+
+
+    <div class="tab-content row col-xs-12">
+        <!-- 这是第一页 -->
+        <div role="tabpanel" class="tab-pane active" id="home">
+            基本信息
+        </div>
+
+        <!--第二页-->
+        <div role="tabpanel" class="tab-pane" id="profile">
+            <div class="bs-example" data-example-id="carousel-with-captions">
+                <div id="carousel-example-captions" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-captions" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-captions" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-captions" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                            <img alt="First slide image" src="__PUBLIC__/Mobile/images/pic5.jpg">
+
+                            </div>
+                        </div>
+                        <div class="item row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <img alt="Second slide image" src="__PUBLIC__/Mobile/images/pic4.jpg">
+
+                            </div>
+                        </div>
+                        <div class="item row">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <img alt="Third slide image" src="__PUBLIC__/Mobile/images/pic3.jpg">
+
+                            </div>
+                        </div>
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example-captions" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-captions" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>商品名称</h4>
+                </div>
+            </div>
+            <div class="row" style="line-height: 30px;">
+                <div class="col-xs-3">
+                    <p>价格：</p>
+                </div>
+                <div class="col-xs-3">
+                    <p class="price">￥9.99</p>
+                </div>
+                <div class="col-xs-3">
+                    <del><small>￥16.80</small></del></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p>库存：</p>
+                </div>
+                <div class="col-xs-3">
+                    <p>num</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5" style="max-width: 150px">
+                    <form class="form-inline">
+                        <div class="form-group input-group-sm">
+                            <label class="sr-only" for="exampleInputAmount">添加购物车</label>
+                            <div class="input-group">
+                                <div class="input-group-addon"><a href="#" onclick="reduce()"><i class="el-icon-minus" style="color: #f7ab00;font-size: 10px"></i></a></div>
+                                <input type="text" class="form-control text-center" id="num" value="1">
+                                <div class="input-group-addon"><a href="#" onclick="add()"><i class="el-icon-plus" style="color: #f7ab00;font-size: 10px"></i></a></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-xs-5 col-xs-offset-2">
+                    <button class="btn btn-danger" type="button" value="" onclick="add_car">加入购物车</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!--第三页    -->
+        <div role="tabpanel" class="tab-pane" id="messages">相关评论</div>
+    </div><!-- tab-content -->
+</div>
+
+
+<script>
+    $("img").addClass("carousel-inner img-responsive img-rounded");
+    function add(){
+        var num = $("#num").val();
+        num = parseInt(num) + 1;
+        $("#num").val(num);
+    }
+    function reduce(){
+        var num = $("#num").val();
+        num = parseInt(num) - 1;
+        if(num < 1){
+            $("#num").val(1);
+        }else{
+            $("#num").val(num);
+        }
+
+    }
+    function add_car(){
+        var num = $("#num").val();
+        var goods_id= 0;
+        var attribute = 0;
+        var user_id = 0;
+    }
+</script>
+</body>
+</html>

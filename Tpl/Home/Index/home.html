@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link type="text/css" href="__PUBLIC__/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="__PUBLIC__/Mobile/css/elusive-webfont.css">
+    <script type="text/javascript" src="__PUBLIC__/bootstrap/js/jquery-2.1.1.min.js"></script>
+    <script  type="text/javascript" src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script>
+    <script  type="text/javascript" src="__PUBLIC__/Mobile/js/common.js"></script>
+    <script  type="text/javascript" src="__PUBLIC__/Mobile/js/jquery.fly.min.js"></script>
+    <style>
+
+        .navbar-top{
+            background-color: limegreen;
+        }
+        .dropdown{
+            background-color: #ffffff;
+        }
+        .act_area{
+            margin-left: 0;
+            margin-right: 0;
+        }
+        .left{
+            padding-right:5px;
+        }
+        .right{
+            padding-left: 5px;
+        }
+        .bs-callout{
+            padding:10px;
+            margin:10px 0;
+            border:1px solid #eee;
+            border-left-width:5px;
+            border-radius:3px
+        }
+        .bs-callout h5{
+            margin-top:0;
+            margin-bottom:5px
+        }
+        .bs-callout p:last-child{
+            margin-bottom:0
+        }
+        .bs-callout code{
+            border-radius:3px
+        }
+        .bs-callout+.bs-callout{
+            margin-top:-5px
+        }
+        .bs-callout-success{
+            border-left-color: #339900;
+        }
+        .bs-callout-success h5{
+            color: #339900;
+        }
+        .list-group{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        .navbar-fixed-bottom p{
+            margin-bottom: 0px;
+        }
+        .navbar-fixed-bottom .col-xs-3{
+            padding-top: 5px;
+        }
+        .navbar-fixed-bottom i{
+            color: lightgray;
+            font-size: 20px;
+        }
+        .badge{
+            /*padding-left: -5px;*/
+            font-size: 8px;
+            background-color: red;
+        }
+        .page{
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <nav class="navbar navbar-default navbar-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header row">
+                <button type="button" class="navbar-toggle collapsed navbar-left" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-map-marker" aria-hidden="true" style="color: #ffffff">{$point['name']}</span></a>
+
+                <button type="button" id="search" class="btn btn-default navbar-btn navbar-right">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true">搜索商品</span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav">
+
+                </ul>
+            </div><!--.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="row act_area">
+        <div class="col-xs-6 left">
+            <img src="__PUBLIC__/Uploads/act.png" alt="" class="img-thumbnail">
+        </div>
+        <div class="col-xs-6 right">
+            <img src="__PUBLIC__/Uploads/sale.png" alt="" class="img-thumbnail">
+        </div>
+    </div>
+
+    <div class="bs-callout bs-callout-success">
+        <h5>大家都在买</h5>
+    </div>
+
+    <div>
+        <!--商品列表-->
+        <ul class="list-group">
+            <volist name="re" id="vo">
+                <li class="list-group-item">
+                    <div class="media row">
+                        <div class="media-left media-middle col-xs-3">
+                            <a href="#" name="{$vo['goods_id']}" attribute="{$vo['attribute']}" onclick="goodsinfo(this)">
+                                <img class="media-object" src="{$vo['root']}{$vo['goods_thumb']}" alt=""/>
+                            </a>
+                        </div>
+                        <div class="media-body row">
+                            <div class="col-xs-9" name="{$vo['goods_id']}" attribute="{$vo['attribute']}" onclick="goodsinfo(this)">
+                                <h4 class="media-heading">{$vo['goods_name']}</h4>
+                                <p><del><small>￥{$vo['market_price']}</small></del></p>
+                                <strong>￥{$vo['goods_price']}</strong>
+                            </div>
+
+                            <div class="col-xs-3 fly"  name="{$vo['goods_id']}" attribute="{$vo['attribute']}" onclick="add_car(this)">
+                                <div class="auto_mar" style="margin-top: 20px">
+                                    <i class="el-icon-shopping-cart-sign" style="color: #f7ab00;font-size: 30px"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </volist>
+
+        </ul>
+    </div><!--商品列表-->
+    <nav>
+    <div class="page">
+        <ul class="pagination pagination-sm">
+            {$page}
+        </ul>
+    </div>
+        </nav>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-xs-3">
+                    <i class="el-icon-home"></i>
+                    <p><small>首页</small></p>
+                </div>
+                <div class="col-xs-3" onclick="my_order()">
+                    <i class="el-icon-file"></i>
+                    <p><small>订单</small></p>
+                </div>
+                <div class="col-xs-3" onclick="my_car()">
+                    <i class="el-icon-shopping-cart"></i>
+                    <p><small>购物车</small><span class="badge"></span></p>
+                </div>
+                <div class="col-xs-3" onclick="mine()">
+                    <i class="el-icon-user"></i>
+                    <p><small>我的</small></p>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script>
+        $("img").addClass("carousel-inner img-responsive img-rounded");
+        var user = localStorage.getItem("jl_uid");
+        $.ajax({
+            type:"post",
+            url:"{:U('BuyCar/get_num')}",
+            data:"user_id="+user,
+            dataType:"json",
+            success:function(data){
+                var num = data['num'];
+                $(".badge").html(num);
+            }
+        });
+        $(".navbar-toggle").click(function(){
+            $.ajax({
+                type:"post",
+                url:"{:U('Index/nav')}",
+                //data:"id="+area_id,
+                dataType:"json",
+                success:function(data){
+                    $(".navbar-nav").html("");
+                    for(var i =0;i<data.length;i++){
+                        var add_text =  "<li class='dropdown'><a href='#' onclick='get_point(this)' name='"+data[i]['goods_cate_id']+"' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>"+data[i]['cate_name']+"<span class='caret'></span></a><ul class='dropdown-menu'> </ul> </li>";
+                        $(".navbar-nav").append(add_text);
+                    }
+                }
+            });
+        });
+
+
+        function get_point(obj){
+            //var name = $(obj).text();
+            var id = $(obj).attr("name");
+            $.ajax({
+                type:"post",
+                url:"{:U('Index/nav2')}",
+                data:"goods_cate_id="+id,
+                dataType:"json",
+                success:function(data){
+                    $(".dropdown-menu").html("");
+                    $(".dropdown-menu").append( "<li><a href='#' onclick='go(this)' id='"+id+"'>全部</a></li>");
+                    for(var i =0;i<data.length;i++){
+                        var add_text = "<li><a href='#' onclick='go(this)' id='"+data[i]['goods_cate_id']+"'>"+data[i]['cate_name']+"</a></li>";
+                        $(".dropdown-menu").append(add_text);
+                    }
+                }
+            });
+        }
+        function go(obj){
+            var id = $(obj).attr("id");
+            var point = localStorage.getItem("jl_point_id");
+            location.href = "{:U('Goods/search')}/goods_cate_id/"+id+"/area_id/"+point;
+        }
+        $("#search").click(function(){
+            location.href = "{:U('Goods/search_html')}";
+        });
+        $(".navbar-brand").click(function(){
+            location.href = "{:U('Index/change_point')}";
+        });
+        //查看商品详情
+        function goodsinfo(obj){
+            var goods_id = $(obj).attr("name");
+            var attribute = $(obj).attr("attribute");
+            location.href = "{:U('Goods/goodsinfo')}/goods_id/"+goods_id+"/attribute/"+attribute;
+        }
+        //添加到购物车
+        function add_car(obj){
+            var user = localStorage.getItem("jl_uid");
+            var count = 1;  //列表模式单个添加
+            if(user){
+                var goods_id = $(obj).attr("name");
+                var attribute = $(obj).attr("attribute");
+                $.ajax({
+                    type:"post",
+                    url:"{:U('BuyCar/add_car')}",
+                    data:"goods_id="+goods_id+"&attribute="+attribute+"&user_id="+user+"&goods_count="+count,
+                    dataType:"json",
+                    success:function(data){
+                        if(data['code'] == 3){
+                            alert("您购买的商品与购物车内商品不在一个服务区，请清空购物车。")
+                        }else if(data['code' == 2]){
+                            var info = "该商品为特价商品，限购"+data['limit_num']+"件。";
+                            alert(info);
+                        }else if(data['code'] == 0){
+                            alert("网络故障，请重新添加");
+                        }else if(data['code'] == 1){
+                            //获取购物车数量
+                            var num = data['num'];
+                            /*$('#fly').fly({
+                                start:{
+                                    left: 11,  //开始位置（必填）#fly元素会被设置成position: fixed
+                                    top: 600,  //开始位置（必填）
+                                },
+                                end:{
+                                    left: 500, //结束位置（必填）
+                                     top: 130,  //结束位置（必填）
+                                    width: 100, //结束时高度
+                                    height: 100, //结束时高度
+                                },
+                                autoPlay: false, //是否直接运动,默认true
+                                speed: 1.1, //越大越快，默认1.2
+                                vertex_Rtop：100, //运动轨迹最高点top值，默认20
+                                    onEnd: function(){} //结束回调
+                        });
+                        $('#fly').play(); //autoPlay: false后，手动调用运动
+                        $('#fly').destroy(); */
+                            $(".badge").html(num);
+                        }
+                    }
+                });
+            }else{
+                alert("您还未登陆，请先登录。");
+                location.href = "{:U('Index/login')}";
+            }
+
+        }
+        function my_order(){
+            var user = localStorage.getItem("jl_uid");
+            if(user){
+                location.href = "{:U('Order/orders')}/user_id/"+user;
+            }else{
+                alert("您还未登陆，请先登录。");
+                location.href = "{:U('Index/login')}";
+            }
+        }
+        //个人中心跳转
+        function mine(){
+            var user = localStorage.getItem("jl_uid");
+            if(user){
+                location.href = "{:U('User/index')}";
+            }else{
+                alert("您还未登陆，请先登录。");
+                location.href = "{:U('Index/login')}";
+            }
+        }
+        //我的购物车
+        function my_car(){
+            var user = localStorage.getItem("jl_uid");
+            if(user){
+                location.href = "{:U('BuyCar/show_car')}/user_id/"+user;
+            }else{
+                alert("您还未登陆，请先登录。");
+                location.href = "{:U('Index/login')}";
+            }
+        }
+
+    </script>
+</div>
+</body>
+</html>
